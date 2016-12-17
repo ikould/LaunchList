@@ -25,7 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    List<LaunchData> packageLaunchs;
+    List<LaunchData> packageLaunch;
     RecyclerView mRvMain;
     PackagesAdapter.RecyclerLister recyclerLister;
     List<String> packageFilters;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        packageLaunchs = new ArrayList<>();
+        packageLaunch = new ArrayList<>();
         initDatas();
         initView();
     }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         launchData.setAppName(name);
                         launchData.setLaunchIcon(drawable);
                         launchData.setPackageName(pkgName);
-                        packageLaunchs.add(launchData);
+                        packageLaunch.add(launchData);
                         Log.d("ResolveInfo", launchData.toString() + "\n");
                     }
                 }
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerLister = new PackagesAdapter.RecyclerLister() {
             @Override
             public void recycleOnClickListener(View v, int position) {
-                LaunchData launchData = packageLaunchs.get(position);
+                LaunchData launchData = packageLaunch.get(position);
                 Intent intent = getPackageManager().getLaunchIntentForPackage(launchData.getPackageName());
                 if (intent == null) {
                     //如果intent为空，则启动系统桌面
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         //设置RecyclerView
         mRvMain = (RecyclerView) findViewById(R.id.rv_main);
         mRvMain.setLayoutManager(new LinearLayoutManager(this));
-        PackagesAdapter packagesAdapter = new PackagesAdapter(packageLaunchs, this, recyclerLister);
+        PackagesAdapter packagesAdapter = new PackagesAdapter(packageLaunch, this, recyclerLister);
         mRvMain.setAdapter(packagesAdapter);
     }
 }
