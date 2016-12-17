@@ -1,0 +1,4 @@
+﻿com.android.settings(设置)
+com.android.apkinstaller(Apk安装器)
+com.android.rk(资源管理器)
+com.speedsoftware.rootexplorer(RE文件管理器)
